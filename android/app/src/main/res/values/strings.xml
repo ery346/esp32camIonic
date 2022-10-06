@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">espCam</string>
+    <string name="title_activity_main">espCam</string>
+    <string name="package_name">esp32.cam</string>
+    <string name="custom_url_scheme">esp32.cam</string>
+</resources>
