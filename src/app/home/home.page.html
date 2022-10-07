@@ -7,36 +7,56 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
- 
-  <ion-item>
-    <ion-label>Esp32 cam</ion-label>
-  </ion-item>
+
   <ion-card class="ion-padding " >
     <ion-card-header>Camara</ion-card-header>
-    <ion-card-content class="flex">
-      <iframe [src]="ip | safe" importance="high" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups"></iframe>
+    <ion-card-content class="flex ">
+      <ion-spinner [hidden]="hideSpinner" color="dark" name="lines-sharp"></ion-spinner>
+      <iframe (load)="evChange(1)" [src]="ip | safe" importance="high" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups"></iframe>
 
     </ion-card-content>
-     <ion-card-subtitle> <ion-button id="btn" (click)="doRefresh()" expand="block" fill="solid" shape="round" color="medium" size="small">
+     <ion-card-subtitle class="ion-text-center"> 
+      <ion-button id="btn" (click)="doRefresh()"  fill="solid" shape="round" color="medium" size="small">
       Back and refresh
-    </ion-button></ion-card-subtitle>
+    </ion-button>
+  </ion-card-subtitle>
 
   </ion-card>
+  <ion-list >
+      <ion-item >
+        <ion-button (click)="flash()" style="font-size:17px; margin-right: 6%;" color="warning" shape="round">
+          <ion-icon  name="flashlight"></ion-icon>
+        </ion-button> 
+        <ion-badge slot="end" [color]="(flashState === 'Encendido')? 'success': 'danger'" >{{flashState}}</ion-badge>
+        <ion-label class="ion-text-center">Flash</ion-label>
+      </ion-item>
+  
+  </ion-list>
  
   <ion-card  class="ion-padding">
     <ion-card-header>Control de visualizacion</ion-card-header>
-    <ion-button size="small" expand="block"  color="dark" shape="round">
+    <div class="degrees">
+      Vertical: <strong>{{verticalDegree}}</strong> ° - horizontal: <strong>{{horizontalDegree}}° </strong>
+
+    </div>
+    <ion-button  (click)="up(5)" size="small" expand="block"  color="secondary" shape="round">
       <ion-icon name="caret-up-outline"></ion-icon>
       </ion-button>
       <ion-item>
         <ion-icon name="caret-back-outline"></ion-icon>
         <ion-label>  
-         <ion-range [min]="0" [max]="10" [value]="5"  [ticks]="true" [snaps]="true"></ion-range>   
+         <ion-range (ionChange)="horizontalDeg($event)" [min]="0" [max]="180" [value]="horizontalDegree" [snaps]="true"></ion-range>   
         </ion-label>
         <ion-icon name="caret-forward-outline"></ion-icon>
       </ion-item>   
-      <ion-button size="small" expand="block"  color="dark" shape="round">
+      <ion-button (click)="down(5)" color="secondary" size="small" expand="block"  shape="round">
         <ion-icon name="caret-down-outline"></ion-icon>
       </ion-button>
+      <div class="ion-padding ion-text-right">
+        <ion-button class="ion-text-capitalize" color="tertiary" (click)="setControls()" size="small" fill="solid" >
+        Default values
+        </ion-button>
+      </div>
+      
   </ion-card>
 </ion-content>

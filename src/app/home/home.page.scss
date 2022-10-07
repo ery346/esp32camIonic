@@ -1,6 +1,6 @@
 
 ion-icon{
-  color: #24a0e7;
+  color: black;
 }
 .flex{
   display: flex;
@@ -10,8 +10,37 @@ ion-icon{
 ion-range {
   --bar-background: #bde0fe87;
   --bar-background-active: black;
-  --bar-height: 8px;
-  --bar-border-radius: 8px;
-  --knob-background: #24a0e7;
-  --knob-size: 40px;
+  --bar-height: 4px;
+  --bar-border-radius: 4px;
+  --knob-background: #0091ff;
+  --knob-size: 28px;
+}
+
+iframe {
+  width: 90%;
+  height: 27vh;
+  position: relative;
+  z-index: 1;
+}
+ion-spinner {
+  position: absolute;
+  z-index: 2;
+  top: 38%;
+  transform: scale(2);
+}
+ion-card-header{
+  padding-top: 0;
+}
+ion-list{
+  padding: 0;
+}
+ion-badge{
+  margin: 0;
+}
+ion-label{
+  margin: 0;
+}
+.degrees{
+  text-align: center;
+
 }
