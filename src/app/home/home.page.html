@@ -1,62 +1,103 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="tertiary">
-    <ion-title>
-      WifiCam
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true" color="dark">
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title style="margin-left: 10px;">Configuracion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding" [color]="(colorMode === 'claro')? '': 'dark'">
+    
+    <app-menu-settings (colorEmit)="prosessColorMode($event)"
+                       (timmerEmit)="prosessTimmer($event)"
+                       (resolutionEmit)="prosessResolution($event)"
+                       (translationEmit)="prosessTranslation($event)"></app-menu-settings>
 
-  <ion-card class="ion-padding " >
-    <ion-card-header>Camara</ion-card-header>
-    <ion-card-content class="flex ">
-      <ion-spinner [hidden]="hideSpinner" color="dark" name="lines-sharp"></ion-spinner>
-      <iframe (load)="evChange(1)" [src]="ip | safe" importance="high" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups"></iframe>
-
-    </ion-card-content>
-     <ion-card-subtitle class="ion-text-center"> 
-      <ion-button id="btn" (click)="doRefresh()"  fill="solid" shape="round" color="medium" size="small">
-      Back and refresh
-    </ion-button>
-  </ion-card-subtitle>
-
-  </ion-card>
-  <ion-list >
-      <ion-item >
-        <ion-button (click)="flash()" style="font-size:17px; margin-right: 6%;" color="warning" shape="round">
-          <ion-icon  name="flashlight"></ion-icon>
-        </ion-button> 
-        <ion-badge slot="end" [color]="(flashState === 'Encendido')? 'success': 'danger'" >{{flashState}}</ion-badge>
-        <ion-label class="ion-text-center">Flash</ion-label>
-      </ion-item>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <!-- Header -->
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4"><ion-title>WifiCam</ion-title></ion-col>
+          <ion-col size="8">
+            <ng-container *ngIf="isAlive else noAlive">
+              <div color="dark" class="ion-text-center conect">
+                <ion-label style="color: rgb(21, 254, 21);" class="animate__animated animate__flash animate__slow animate__infinite">Camara conectada</ion-label>
+              </div>
+            </ng-container>
+            <ng-template #noAlive>
+              <div color="dark" class="ion-text-center conect">
+                <ion-label style="color: var(--ion-color-danger);" class="animate__animated animate__flash animate__slow animate__infinite">Camara desconectada</ion-label>
+              </div>
+            </ng-template>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [color]="(colorMode === 'claro')? 'light': 'dark'" class="ion-padding">
+    <!-- Camara card -->
+    <ion-card [color]="(colorMode === 'claro')? '': 'medium'" class="ion-padding " >
+      <ion-card-header>Camara</ion-card-header>
+        <ion-card-content class="flex ion-no-padding">
+          <ion-spinner [hidden]="hideSpinner" [color]="(colorMode === 'claro')? 'secondary': 'light'" name="lines-sharp"></ion-spinner>
+          <iframe [width]="resolution.width" [height]="resolution.height" (load)="evFrameChange(1)" [src]="ip | safe" importance="high" sandbox="allow-scripts allow-top-navigation allow-pointer-lock allow-same-origin allow-popups"></iframe>
+        </ion-card-content>
+       <ion-card-subtitle class="ion-text-center"> 
+          <ion-button (click)="doRefresh()"  class="ion-text-capitalize"  fill="solid" shape="round" [color]="(colorMode === 'claro')? 'tertiary': 'light'" size="small">
+            Refresh
+          </ion-button> 
+        </ion-card-subtitle>
   
-  </ion-list>
- 
-  <ion-card  class="ion-padding">
-    <ion-card-header>Control de visualizacion</ion-card-header>
-    <div class="degrees">
-      Vertical: <strong>{{verticalDegree}}</strong> ° - horizontal: <strong>{{horizontalDegree}}° </strong>
-
-    </div>
-    <ion-button  (click)="up(5)" size="small" expand="block"  color="secondary" shape="round">
-      <ion-icon name="caret-up-outline"></ion-icon>
-      </ion-button>
-      <ion-item>
-        <ion-icon name="caret-back-outline"></ion-icon>
-        <ion-label>  
-         <ion-range (ionChange)="horizontalDeg($event)" [min]="0" [max]="180" [value]="horizontalDegree" [snaps]="true"></ion-range>   
-        </ion-label>
-        <ion-icon name="caret-forward-outline"></ion-icon>
-      </ion-item>   
-      <ion-button (click)="down(5)" color="secondary" size="small" expand="block"  shape="round">
-        <ion-icon name="caret-down-outline"></ion-icon>
-      </ion-button>
-      <div class="ion-padding ion-text-right">
-        <ion-button class="ion-text-capitalize" color="tertiary" (click)="setControls()" size="small" fill="solid" >
-        Default values
-        </ion-button>
-      </div>
-      
-  </ion-card>
-</ion-content>
+    </ion-card>
+    <!-- Flash -->
+    <ion-item [color]="(colorMode === 'claro')? 'light': 'dark'" lines="none">
+      <ion-button (click)="flash()" style="font-size:17px; margin-right: 6%;" color="warning" shape="round">
+        <ion-icon  name="flashlight"></ion-icon>
+      </ion-button> 
+      <ion-badge slot="end" [color]="(flashState === 'Encendido')? 'success': 'danger'" >{{flashState}}</ion-badge>
+      <ion-label class="ion-text-center">Flash({{timmer | timmerString}})</ion-label>
+    </ion-item>
+    <!-- Control card -->
+    <ion-card [color]="(colorMode === 'claro')? '': 'medium'" class="ion-padding">
+      <app-control-view></app-control-view>
+      <!-- <ion-card-header>Control de visualizacion</ion-card-header>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="5" >
+            <div style="height: 190px;" class="custom-slider">
+              <ngx-slider [(value)]="verticalDegree" 
+                          [options]="optionsV"
+                          (userChangeStart)="onUserChangeStartV($event)"
+                          (userChange)="onUserChangeV($event)"
+                          ></ngx-slider>
+            </div>
+          </ion-col>
+          <ion-col size="6" style="margin-top: 16px;">
+          <div class="degrees">
+            Vertical: <strong>{{verticalDegree}}° </strong> <p> Horizontal: <strong>{{horizontalDegree}}° </strong></p>
+          </div>
+          <div class="ion-padding-top ">
+            <ion-button class="ion-text-capitalize" color="primary" (click)="setControls()" size="small" fill="solid" >
+            set 90°
+            </ion-button>
+          </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="margin-left:85px; width: 195px;"  class="custom-slider">
+          <ngx-slider  [(value)]="horizontalDegree" 
+                      [options]="optionsH"
+                      (userChangeStart)="onUserChangeStartH($event)"
+                      (userChange)="onUserChangeH($event)"></ngx-slider>
+      </div>   
+         -->
+    </ion-card>
+    
+  </ion-content>
+</div>

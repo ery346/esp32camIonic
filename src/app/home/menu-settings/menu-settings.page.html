@@ -1,0 +1,83 @@
+    <!-- tema -->
+    <ion-item-group >
+      <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-label>{{lenguageOp.titleMenu1}}</ion-label>
+      </ion-item-divider>
+      <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'light'">
+        <ion-segment  (ionChange)="changeTheme($event)" value="claro" selectOnFocus="true">
+          <ion-segment-button value="claro" class="ion-text-capitalize" >
+            <ion-label>{{lenguageOp.btnMenu1}}</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="obscuro" class="ion-text-capitalize">
+            <ion-label>{{lenguageOp.btnMenu2}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+    </ion-item-group>
+    <br>
+    <!-- timmer -->
+    <ion-item-group  >
+      <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-label>{{lenguageOp.titleMenu2}}</ion-label>
+      </ion-item-divider>
+      <ion-item  lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-radio-group style="margin-left: 25%;" (ionChange)="changeTimmer($event)" value="3000" >
+          <ion-item class="ion-text-center" lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>0.5s</ion-label>
+            <ion-radio color="success" mode="md"  slot="end" value="500"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>1s</ion-label>
+            <ion-radio color="success" mode="md"  slot="end" value="1000"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>3s</ion-label>
+            <ion-radio color="success" mode="md" slot="end" value="3000"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>5s</ion-label>
+            <ion-radio color="success" mode="md" slot="end" value="5000"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item>
+    </ion-item-group>
+    <br>
+    <!-- resolucion -->
+    <ion-item-group >
+      <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-label>{{lenguageOp.titleMenu3}}</ion-label>
+      </ion-item-divider>
+      <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-radio-group style="margin-left: 9%;" (ionChange)="changeResolution($event)" value="m" >
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>{{lenguageOp.resolutionMenu1}} <small>276x230</small></ion-label>
+            <ion-radio color="success" mode="ios"  slot="end" value="p"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>{{lenguageOp.resolutionMenu2}} <small>296x255</small></ion-label>
+            <ion-radio color="success" mode="ios"  slot="end" value="m"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'medium'">
+            <ion-label>{{lenguageOp.resolutionMenu3}} <small>310x275</small></ion-label>
+            <ion-radio color="success" mode="ios" slot="end" value="g" ></ion-radio>
+          </ion-item>
+        
+        </ion-radio-group>
+      </ion-item>
+    </ion-item-group>
+    <br>
+    <ion-item-group >
+      <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-label>{{lenguageOp.titleMenu4}}</ion-label>
+      </ion-item-divider>
+      <ion-item lines="none" [color]="(colorMode === 'claro')? '': 'light'">
+        <ion-segment  (ionChange)="changeLenguage($event)" value="es" selectOnFocus="true">
+          <ion-segment-button value="es" class="ion-text-capitalize" >
+            <ion-label>Español</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="en" class="ion-text-capitalize">
+            <ion-label>English</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+    </ion-item-group>

@@ -1,65 +1,90 @@
 import { Component } from '@angular/core';
-import { RangeCustomEvent, RangeValue } from '@ionic/core';
+import { RtdbService } from '../services/rtdb.service';
+import { resolution } from '../interface/obj.interface';
+import { TranslationService } from '../services/translation.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  ip: string = 'http://192.168.0.9'
-  verticalDegree: number = 90;
-  horizontalDegree: RangeValue = 90;
+  ip: String ='http://';
   flashState: string = 'Apagado';
   evIframe:number = 0;
   hideSpinner: boolean = false;
-  constructor() {}
+  ipRtdb: string = '';
+  isAlive: boolean;
+  colorMode:string='claro'; 
+  timmer: number;
+  resolution: resolution = {width: '296', height: '255'};
+
+  constructor(private rtdbS: RtdbService, private lenguageS: TranslationService) {
+    rtdbS.ip().subscribe(res => {
+      this.ipRtdb = `http://${res[0]}/`;
+      this.ip = this.ipRtdb;
+    });
+    rtdbS.statusConected().subscribe(res => {
+      this.isAlive = res[0].value;
+    });
+  }
+  prosessColorMode(value:string){
+    this.colorMode = value;
+  }
+  prosessTimmer(value:number){
+    this.timmer = value;
+  }
+  prosessResolution(value:resolution){
+    this.resolution = value;
+  }
+  prosessTranslation(value:string){
+    switch (value) {
+      case 'es':
+      //  this.lenguageOp = this.lenguageS.menuSpanish();
+        break;
+    
+      case 'en':
+        // this.lenguageOp = this.lenguageS.menuEnglish();
+
+          break;
+      default:
+        break;
+    }
+  }
   doRefresh() {
     this.ip = '';
+    this.evIframe = 1;
     setTimeout(() => {
-      this.ip = 'http://192.168.0.9';
-    }, 50);
+      this.ip = this.ipRtdb;
+    }, 500);
   }
 
-  up(deg: number){
-    this.verticalDegree = this.verticalDegree + deg;
-    if (this.verticalDegree >= 180) {
-      this.verticalDegree = 180;
-      // console.log(this.verticalDegree,'nada');
-      // return
-    }
-    console.log(this.verticalDegree );
-  }
-  down(deg: number){
-    this.verticalDegree = this.verticalDegree - deg;
-    if (this.verticalDegree <= 0) {
-      this.verticalDegree = 0;
-      // console.log(this.verticalDegree,'nada');
-      // return
-    }
-    console.log(this.verticalDegree,'send');
-    
-  }
 
   flash(){
     this.flashState = 'Encendido';
+    this.rtdbS.flash().update('key1', {value:'on'})
     setTimeout(() => {
       this.flashState = 'Apagado';
-    }, 2000);
+      this.rtdbS.flash().update('key1', {value:'off'})
+    }, this.timmer);
   }
-  setControls(){
-    this.verticalDegree = 90;
-    this.horizontalDegree = 90;
-  }
-  horizontalDeg(ev: Event) {
-    this.horizontalDegree = (ev as RangeCustomEvent).detail.value;
-  }
-  evChange(val: number){
+
+
+  evFrameChange(val: number){
    this.evIframe = this.evIframe + val;
-    if (this.evIframe === 1) {
+  //  console.log(this.evIframe);
+   
+    if (this.evIframe === 1) {      
       this.hideSpinner = false;
+      // console.log('on');
     }else if(this.evIframe === 2){
+      this.hideSpinner = false;
+      // console.log('on');
+    }
+    else if(this.evIframe === 3){
       this.hideSpinner = true;
-      this.evIframe = 0;
+      // console.log('off');
     }
   }
+
 }

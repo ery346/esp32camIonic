@@ -1,24 +1,32 @@
 
 ion-icon{
-  color: black;
+  color: var(--ion-color-secondary);
+}
+ion-card{
+  margin: 0;
 }
 .flex{
   display: flex;
   justify-content: center;
 }
-
+ion-grid {
+  padding:0;
+}
 ion-range {
   --bar-background: #bde0fe87;
-  --bar-background-active: black;
+  --bar-background-active: #0a4f70;
   --bar-height: 4px;
   --bar-border-radius: 4px;
-  --knob-background: #0091ff;
+  --knob-background: #51c5dd;
   --knob-size: 28px;
 }
-
+ion-item{
+  border-radius: 10px;
+  background: #51c5dd;
+}
 iframe {
-  width: 90%;
-  height: 27vh;
+  // width: 90%;
+  // height: 30vh;
   position: relative;
   z-index: 1;
 }
@@ -29,7 +37,10 @@ ion-spinner {
   transform: scale(2);
 }
 ion-card-header{
-  padding-top: 0;
+  padding: 0;
+  padding-bottom: 5px;
+  margin-left: 20%;
+
 }
 ion-list{
   padding: 0;
@@ -40,7 +51,30 @@ ion-badge{
 ion-label{
   margin: 0;
 }
+ion-title{
+  padding: 0;
+}
 .degrees{
-  text-align: center;
+  // text-align: center;
+  margin-top: 10px;
 
+}
+
+.conect{
+  margin-top: 1%;
+}
+::ng-deep {
+  .custom-slider .ngx-slider .ngx-slider-bar {
+    background: #0a4f70;
+  }
+}
+
+ion-menu::part(backdrop) {
+  background-color: #0a4f70;
+}
+
+ion-menu::part(container) {
+  border-radius: 0 20px 20px 0;
+
+  box-shadow: 2px 0px 16px rgba(0, 225, 255, 0.294);
 }

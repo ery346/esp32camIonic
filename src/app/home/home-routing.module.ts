@@ -6,6 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'menu-settings',
+    loadChildren: () => import('./menu-settings/menu-settings.module').then( m => m.MenuSettingsPageModule)
+  },
+  {
+    path: 'control-view',
+    loadChildren: () => import('./control-view/control-view.module').then( m => m.ControlViewPageModule)
   }
 ];
 
