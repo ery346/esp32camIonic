@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="secondary">
+    <div class="flex">
+      <div >
+        <ion-title >Firebase Proyect</ion-title>
+      </div>
+      <div >
+        <ion-button style="margin:0; margin-bottom: 10px;" routerLink="/home"  fill="clear" shape="round">
+          Back
+        </ion-button>
+      </div>
+    </div>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+
+  <ion-card >
+    <div class="nestedcontent"> 
+
+      <div id="title">httpCam</div>
+      <div id="parent" updatedColorBorder [changedValue]="ipValue">ip</div>
+      <div id="child" updatedColorBorder [changedValue]="ipValue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleIp" >{{ipValue}}</strong></span>
+      <hr>
+      <div id="title">flash</div>
+      <div id="parent" updatedColorBorder [changedValue]="flashValue">key1</div>
+      <div id="child" updatedColorBorder [changedValue]="flashValue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleFlash" >{{flashValue}}</strong></span>
+      <hr>
+      <div id="title">isAlive</div>
+      <div id="parent" updatedColorBorder [changedValue]="statusValue">status</div>
+      <div id="child" updatedColorBorder [changedValue]="ipVstatusValuealue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleStatus" >{{statusValue}}</strong></span>
+      <div id="parent" updatedColorBorder [changedValue]="vitalSignValue">vitalSigns</div>
+      <div id="child" updatedColorBorder [changedValue]="vitalSignValue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleVitalS" >{{vitalSignValue}}</strong></span>
+      <hr>
+      <div id="title">horizontal</div>
+      <div id="parent" updatedColorBorder [changedValue]="horizontalValue">degrees</div>
+      <div id="child" updatedColorBorder [changedValue]="horizontalValue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleHor" >{{horizontalValue}}</strong></span>
+      <hr>
+      <div id="title">vertical</div>
+      <div id="parent" updatedColorBorder [changedValue]="verticalValue">degrees</div>
+      <div id="child" updatedColorBorder [changedValue]="verticalValue">value</div>
+      <span id="value">:<strong  updatedColorBorder [styleValue]="resultStyleVer" >{{verticalValue}}</strong></span>
+    </div>
+  
+  </ion-card>
+</ion-content>

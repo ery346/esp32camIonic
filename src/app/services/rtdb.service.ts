@@ -11,9 +11,7 @@ export class RtdbService {
   itemIp: Observable<any[]>;
   itemsRefConected: AngularFireList<any>;
   itemConected: Observable<any[]>;
-  itemsRefFlash: AngularFireList<any>;
-  itemsRefUpDown: AngularFireList<any>;
-  itemsRefLeftRight: AngularFireList<any>;
+  itemsRefStream: AngularFireList<any>;
   itemsRefUpdate: AngularFireList<any>;
   time:any;
   constructor(private db: AngularFireDatabase,) {
@@ -30,21 +28,11 @@ export class RtdbService {
     return this.itemsRefIP.valueChanges();
   }
 
-  flash(){
-    this.itemsRefFlash = this.db.list('flash');
-    return this.itemsRefFlash;
+  streamData(){
+    this.itemsRefStream = this.db.list('stream');
+    return this.itemsRefStream;
   }
-
-  vertical(){
-    this.itemsRefUpDown = this.db.list('vertical');
-    return this.itemsRefUpDown;
-  }
-
-  horizontal(){
-    this.itemsRefLeftRight = this.db.list('horizontal');
-    return this.itemsRefLeftRight;
-  }
-
+  
   statusConected(){
     this.itemConected = this.itemsRefConected.snapshotChanges().pipe(
       map(changes => 
@@ -57,12 +45,26 @@ export class RtdbService {
 
   isAlive(){
     this.itemsRefConected = this.db.list('isAlive');
-    this.itemsRefConected.snapshotChanges().subscribe(res => {
+    this.statusConected().subscribe(res => {
+      // TODO: 
+      console.log(res);
+      
       clearTimeout(this.time);
       this.time = setTimeout(() => {
-        this.updateStatus()
-      }, 10000)
-    })
+        this.updateStatus();
+        console.log('update false');
+      }, 12000)
+    });
+    // this.itemsRefConected.snapshotChanges().subscribe(res => {
+    //   // TODO: 
+    //   console.log(res);
+      
+    //   clearTimeout(this.time);
+    //   this.time = setTimeout(() => {
+    //     this.updateStatus();
+    //     console.log('update false');
+    //   }, 10000)
+    // })
 
   }
 

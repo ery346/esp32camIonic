@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RtdbService } from '../services/rtdb.service';
-import { resolution } from '../interface/obj.interface';
+import { lengEsEnHome, resolution } from '../interface/obj.interface';
 import { TranslationService } from '../services/translation.service';
 
 @Component({
@@ -10,16 +10,18 @@ import { TranslationService } from '../services/translation.service';
 })
 export class HomePage {
   ip: String ='http://';
-  flashState: string = 'Apagado';
+  flashState: boolean = false ;
   evIframe:number = 0;
   hideSpinner: boolean = false;
   ipRtdb: string = '';
   isAlive: boolean;
   colorMode:string='claro'; 
-  timmer: number;
+  timmer: number = 3000;
   resolution: resolution = {width: '296', height: '255'};
+  lenguage: lengEsEnHome;
 
-  constructor(private rtdbS: RtdbService, private lenguageS: TranslationService) {
+  constructor(private rtdbS: RtdbService, 
+              private lenguageS: TranslationService) {
     rtdbS.ip().subscribe(res => {
       this.ipRtdb = `http://${res[0]}/`;
       this.ip = this.ipRtdb;
@@ -27,7 +29,9 @@ export class HomePage {
     rtdbS.statusConected().subscribe(res => {
       this.isAlive = res[0].value;
     });
+    this.lenguage = this.lenguageS.homeSpanish();
   }
+
   prosessColorMode(value:string){
     this.colorMode = value;
   }
@@ -40,11 +44,12 @@ export class HomePage {
   prosessTranslation(value:string){
     switch (value) {
       case 'es':
-      //  this.lenguageOp = this.lenguageS.menuSpanish();
+       this.lenguage = this.lenguageS.homeSpanish();
+
         break;
     
       case 'en':
-        // this.lenguageOp = this.lenguageS.menuEnglish();
+        this.lenguage = this.lenguageS.homeEnglish();
 
           break;
       default:
@@ -59,32 +64,33 @@ export class HomePage {
     }, 500);
   }
 
-
-  flash(){
-    this.flashState = 'Encendido';
-    this.rtdbS.flash().update('key1', {value:'on'})
-    setTimeout(() => {
-      this.flashState = 'Apagado';
-      this.rtdbS.flash().update('key1', {value:'off'})
-    }, this.timmer);
-  }
-
-
   evFrameChange(val: number){
-   this.evIframe = this.evIframe + val;
-  //  console.log(this.evIframe);
+    this.evIframe = this.evIframe + val;
+   //  console.log(this.evIframe);
+    
+     if (this.evIframe === 1) {      
+       this.hideSpinner = false;
+       // console.log('on');
+     }else if(this.evIframe === 2){
+       this.hideSpinner = false;
+       // console.log('on');
+     }
+     else if(this.evIframe === 3){
+       this.hideSpinner = true;
+       // console.log('off');
+     }
+   }
    
-    if (this.evIframe === 1) {      
-      this.hideSpinner = false;
-      // console.log('on');
-    }else if(this.evIframe === 2){
-      this.hideSpinner = false;
-      // console.log('on');
-    }
-    else if(this.evIframe === 3){
-      this.hideSpinner = true;
-      // console.log('off');
-    }
+   logout(){
+    
+   }
+  flash(){
+    this.flashState = true;
+    this.rtdbS.streamData().update('data/flash', {value:'on'})
+    setTimeout(() => {
+      this.flashState = false;
+      this.rtdbS.streamData().update('data/flash', {value:'off'})
+    }, this.timmer);
   }
 
 }

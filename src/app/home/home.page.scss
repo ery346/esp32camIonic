@@ -1,10 +1,10 @@
 
-ion-icon{
+#flashIcon{
   color: var(--ion-color-secondary);
 }
-ion-card{
-  margin: 0;
-}
+// ion-card{
+//   margin: 0;
+// }
 .flex{
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@ ion-range {
   --knob-size: 28px;
 }
 ion-item{
-  border-radius: 10px;
+  // border-radius: 10px;
   background: #51c5dd;
 }
 iframe {
@@ -37,10 +37,8 @@ ion-spinner {
   transform: scale(2);
 }
 ion-card-header{
-  padding: 0;
   padding-bottom: 5px;
-  margin-left: 20%;
-
+  padding-top: 0;
 }
 ion-list{
   padding: 0;
@@ -77,4 +75,7 @@ ion-menu::part(container) {
   border-radius: 0 20px 20px 0;
 
   box-shadow: 2px 0px 16px rgba(0, 225, 255, 0.294);
+}
+.flash-padding{
+  padding: 0;
 }

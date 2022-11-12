@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import {lengEsEnMenu, resolution } from 'src/app/interface/obj.interface';
 import { TranslationService } from 'src/app/services/translation.service';
 
@@ -15,7 +16,8 @@ export class MenuSettingsPage  {
   colorMode: string = 'claro';
   resolution: resolution;
   lenguageOp: lengEsEnMenu;
-  constructor( private lenguageS: TranslationService) {
+  constructor( private lenguageS: TranslationService,
+                private route: Router) {
     this.lenguageOp = lenguageS.menuSpanish();
    }
 
@@ -57,5 +59,8 @@ export class MenuSettingsPage  {
         default:
           break;
       }
+  }
+  watchRtdbPage(){
+    this.route.navigateByUrl('/rtdb-page');
   }
 }

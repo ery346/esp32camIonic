@@ -4,7 +4,6 @@ export interface resolution {
 }
 
 export type lengEsEnMenu = {
-    title: 'Confifguracion' | 'Settings',
     titleMenu1: 'Tema' | 'Theme',
     titleMenu2: 'Contador del flash' | 'Flash`s Timmer',
     titleMenu3: 'Resolucion de vista' | 'View`s Resolutions',
@@ -17,11 +16,22 @@ export type lengEsEnMenu = {
   };
   
 export type lengEsEnHome= {
+    titleMenu: 'Confifguracion' | 'Settings',
     cardTitle1: 'Camara' | 'Camera',
     cardTitle2: 'Control de visualizacion' | 'View`s control',
     btnCard1: 'Refrescar' | 'Refresh',
-    labelFlashStatus1: 'Encendido' | 'On',
-    labelFlashStatus2: 'Apagado' | 'Off',
+    btnCard2: 'Establecer' | 'Set',
+    labelFlashStatusOn: 'Encendido' | 'On',
+    labelFlashStatusOff: 'Apagado' | 'Off',
     labelHorizontal: 'Horizontal' | 'Horizontal',
     labelVertical: 'Vertical' |  'Vertical',
+    labelCamaraStatusOn: 'Conectada' | 'Connected';
+    labelCamaraStatusOff: 'Desconectada' | 'Disconnected';
+    labelLogout: 'Cerrar sesion' | 'Log out';
   };
+
+  // export interface styledV {
+  //   border: string,
+  //   borderRadius:string,
+  //   backgroundColor:string
+  // }

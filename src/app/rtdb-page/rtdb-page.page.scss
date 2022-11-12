@@ -1,0 +1,72 @@
+.flex{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+ion-toolbar{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    // color: rgba(247, 247, 164, 0.501);
+}
+
+.flex{
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    #key{
+       text-decoration: underline;
+    }
+    #value{
+        text-transform: capitalize;
+    }
+}
+
+.nestedcontent{
+    text-align: justify;
+    #title{
+        color:var(--ion-color-secondary);;
+        background-color: var(--ion-color-light);
+        text-align: center;
+        font-style: italic;
+        font-weight: bold;
+        width:30vw;
+        border-radius: 8px;
+        border: 2px double var(--ion-color-secondary-tint);
+        padding: 2%;
+    }
+    #parent{
+        text-align: center;
+        border-left: 3px solid black;
+        border-bottom: 1px solid rgb(138, 138, 138);
+        padding-top: 2%;
+        margin-left: 4%;
+        padding-left: 2%;
+        padding-bottom: 2%;
+        width:30vw;
+    }
+
+    #child{
+        border-left: 2px solid black;
+        border-bottom: 1px dotted black;
+        padding-top: 2%;
+        margin-left: 33%;
+        padding-left: 4%;
+        padding-bottom: 2%;
+        width:18vw;
+        display: inline-block;
+    }
+    #value{
+        strong{
+            padding: 2%;
+        }
+        // padding-top: 4%;
+        // margin-left: 3%;
+        // padding-left: 2%;
+        // padding-bottom: 2%;
+        // width:22vw;
+
+    }
+
+}

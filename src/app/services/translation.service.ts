@@ -11,7 +11,6 @@ export class TranslationService {
 
   menuSpanish(){
     return  this.menuLenguageOp = {
-      title: 'Confifguracion',
       titleMenu1: 'Tema',
       titleMenu2: 'Contador del flash',
       titleMenu3: 'Resolucion de vista',
@@ -26,7 +25,6 @@ export class TranslationService {
 
   menuEnglish(){
     return this.menuLenguageOp = {
-      title: 'Settings',
       titleMenu1: 'Theme',
       titleMenu2: 'Flash`s Timmer',
       titleMenu3: 'View`s Resolutions',
@@ -41,25 +39,35 @@ export class TranslationService {
 
   homeSpanish(){
     return this.homeLenguageOp = {
+      titleMenu: 'Confifguracion',
       cardTitle1: 'Camara',
       cardTitle2: 'Control de visualizacion',
       btnCard1: 'Refrescar',
-      labelFlashStatus1: 'Encendido',
-      labelFlashStatus2: 'Apagado',
+      btnCard2: 'Establecer',
+      labelFlashStatusOn: 'Encendido',
+      labelFlashStatusOff: 'Apagado',
       labelHorizontal: 'Horizontal',
-      labelVertical: 'Vertical'
+      labelVertical: 'Vertical',
+      labelCamaraStatusOn: 'Conectada',
+      labelCamaraStatusOff: 'Desconectada',
+      labelLogout: 'Cerrar sesion'
     }
   }
 
   homeEnglish(){
     return this.homeLenguageOp = {
+      titleMenu: 'Settings',
       cardTitle1: 'Camera',
       cardTitle2: 'View`s control',
       btnCard1: 'Refresh',
-      labelFlashStatus1: 'On',
-      labelFlashStatus2: 'Off',
+      btnCard2: 'Set',
+      labelFlashStatusOn: 'On',
+      labelFlashStatusOff: 'Off',
       labelHorizontal: 'Horizontal',
-      labelVertical: 'Vertical'
+      labelVertical: 'Vertical',
+      labelCamaraStatusOn: 'Connected',
+      labelCamaraStatusOff: 'Disconnected',
+      labelLogout: 'Log out'
     }
   }
 }

@@ -1,6 +1,7 @@
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RtdbService } from 'src/app/services/rtdb.service';
+import { lengEsEnHome } from '../../interface/obj.interface';
 
 @Component({
   selector: 'app-control-view',
@@ -8,6 +9,7 @@ import { RtdbService } from 'src/app/services/rtdb.service';
   styleUrls: ['./control-view.page.scss'],
 })
 export class ControlViewPage   {
+  @Input() lenguage: lengEsEnHome;
   verticalDegree: number = 90;
   horizontalDegree: number = 90;
   optionsV: Options = {
@@ -15,13 +17,13 @@ export class ControlViewPage   {
     ceil: 180,
     vertical: true,
     hidePointerLabels:true,
-    getPointerColor:(value: number): string => { return '#51c5dd'},
+    getPointerColor:(): string => { return '#51c5dd'},
   };
   optionsH: Options = {
     floor: 0,
     ceil: 180,
     hidePointerLabels:true,
-    getPointerColor:(value: number): string => { return '#51c5dd'},
+    getPointerColor:(): string => { return '#51c5dd'},
   };
   
   constructor(private rtdbS: RtdbService) { }
@@ -34,8 +36,7 @@ export class ControlViewPage   {
   }
 
   getChangeContextStringV(changeContext: ChangeContext): void {
-    this.rtdbS.vertical().update('degrees',{value:this.verticalDegree});
-    console.log('update v to rtdb', changeContext.value);
+    this.rtdbS.streamData().update('data/vertical',{value:this.verticalDegree});
   }
   onUserChangeStartH(changeContext: ChangeContext): void {
     this.getChangeContextStringH(changeContext);
@@ -45,13 +46,12 @@ export class ControlViewPage   {
   }
 
   getChangeContextStringH(changeContext: ChangeContext): void {
-    this.rtdbS.horizontal().update('degrees',{value: this.horizontalDegree});
-    console.log('update h to rtdb', changeContext.value);
+    this.rtdbS.streamData().update('data/horizontal',{value: this.horizontalDegree});
   }
   setControls(){
     this.verticalDegree = 90;
     this.horizontalDegree = 90;
-    this.rtdbS.vertical().update('degrees',{value:this.verticalDegree});
-    this.rtdbS.horizontal().update('degrees',{value:this.horizontalDegree});
+    this.rtdbS.streamData().update('data/vertical',{value:this.verticalDegree});
+    this.rtdbS.streamData().update('data/horizontal',{value:this.horizontalDegree});
   }
 }

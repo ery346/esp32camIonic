@@ -66,6 +66,7 @@
       </ion-item>
     </ion-item-group>
     <br>
+    <!-- idioma -->
     <ion-item-group >
       <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
         <ion-label>{{lenguageOp.titleMenu4}}</ion-label>
@@ -80,4 +81,13 @@
           </ion-segment-button>
         </ion-segment>
       </ion-item>
+    </ion-item-group>
+    <br>
+    <ion-item-group >
+      <ion-item-divider [color]="(colorMode === 'claro')? '': 'medium'">
+        <ion-label>RTDB</ion-label>
+      </ion-item-divider>
+      <ion-button expand="block" (click)="watchRtdbPage()">
+        <ion-icon name="logo-firebase"></ion-icon>
+      </ion-button>
     </ion-item-group>

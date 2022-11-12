@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'rtdb-page',
+    loadChildren: () => import('./rtdb-page/rtdb-page.module').then( m => m.RtdbPagePageModule)
+  },
 ];
 
 @NgModule({
